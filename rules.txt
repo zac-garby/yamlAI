@@ -1,0 +1,17 @@
+  === Rules ===
+In rule declarations:
+  !0-9          -> Saves the word in its place
+  x|y           -> Matches either x or y
+  *             -> Matches anything recursively
+  .             -> Matches anything once
+
+In output strings:
+  ?0-9          -> Loads the variable defined in the rule declaration
+  %x|y|z%       -> Chooses randomly betweeen 'x', 'y', and 'z'
+  :x=0:         -> Sets data field 'x' to variable 0
+  ::x=hello::   -> Sets data field 'x' to 'hello'
+  @x            -> Loads the data field called 'x'
+  {func arg}    -> Runs the function 'func' defined in functions.rb and replaces the call with the result of it
+                  - The function is passed the argument, the variables, and the AI's data
+  [*command]     -> Runs 'command' in the terminal
+  *-*            -> Clears the screen, by printing "\e[H\e[2J"
