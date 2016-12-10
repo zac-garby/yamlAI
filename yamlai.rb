@@ -13,8 +13,8 @@ $find_function_call_pattern = /\{(\w[\w\d]*[\?\!]?)[^{}]*\}/ # Matches a Ruby fu
 $find_command_call_pattern = /\[\*[^\[\]]+\]/ # Matches a star followed by any non-square bracket characters, wrapped by square brackets
 $find_clear_pattern = /\s(\*-\*)\s/ # Matches a dash surrounded by two stars with whitespace on either side
 $rule_split_pattern = /(\s|\*|\!)/ # Used for splitting a rule by whitespace, stars and exclaimation marks
-$punctuation = /[^\w\s]/ # Some punctuation excluding apostrophes and a few others
-$punc_no_apos = /[^\w\s']/
+$punctuation = /[^\w\s]/ # Some punctuation
+$punc_no_apos = /[^\w\s']/ # Some punctuation excluding apostrophes
 
 class String
   def is_pos_i?
