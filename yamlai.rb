@@ -17,20 +17,20 @@ $punctuation = /[^\w\s]/ # Some punctuation
 $punc_no_apos = /[^\w\s']/ # Some punctuation excluding apostrophes
 
 class String
-  def is_pos_i?
+  def is_pos_i? # Checks if a string can be converted to a positive integer
     /\A[+]?\d+\z/ === self
   end
   
-  def remove_punctuation!
-    self.gsub(/[^\p{Alnum}\s]/, "")
+  def remove_punctuation! # Removes all punctuation from a string
+    self.gsub($punctuation, "")
   end
   
-  def strip_ch(chars)
+  def strip_ch(chars) # Strips certain characters from the beginning and end of a string
     chars = Regexp.escape(chars)
     self.gsub(/\A[#{chars}]+|[#{chars}]+\z/, "")
   end
   
-  def strip_ch!(chars)
+  def strip_ch!(chars) # Same as above, but modifies the string
     chars = Regexp.escape(chars)
     self.gsub!(/\A[#{chars}]+|[#{chars}]+\z/, "")
   end
@@ -115,6 +115,13 @@ class AI
     end
     text.strip!
     puts "Set string data fields: #{text}" if verbose
+    
+    while text[/!clr!/] != nil do
+      # puts text[/!clr!/]
+      puts "\e[H\e[2J"
+      text[/!clr!/] = ""
+    end
+    text.strip!
     return text
   end
   
@@ -135,8 +142,8 @@ class AI
             save = ''
             while not ['y', 'n'].include? save do
               print "Do you want to save the data from this session? It will #{"overwrite".red} the data currently in '#{@path}'! [#{"y".green}/#{"n".light_red}] ".italic
-              save = STDIN.getch # Uncomment to allow save choosing
-              save = 'n'
+              save = STDIN.getch # Uncomment to allow save choosing. Uncomment the below line when save choosing is disabled
+              # save = 'n'
               puts
             end
             if save == 'y' then
@@ -261,6 +268,7 @@ def expand_contractions(text)
     "you're" => "you are",
     "you've" => "you have",
     "she'd've" => "she would have"
+    # TODO: Add more contractions
   }
   cont.each do |contraction, proper|
     text.gsub!(contraction, proper)
