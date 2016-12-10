@@ -8,7 +8,6 @@ rules:
   i am called !0 * | call me !0 * | my name is !0 *: "::person={upper ?0}:: Okay,
     @person. I will now call you {upper ?0}."
   call yourself !0 * | your name is now !0 *: "::name={upper ?0}:: Okay, I am now called {upper ?0}"
-  __unknown: "%What|Huh|What do you mean%?"
   __load: Hello!
   __exit: Goodbye
-  
+  __unknown: "%What|Huh|What do you mean%?"

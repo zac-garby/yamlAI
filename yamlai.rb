@@ -1,7 +1,7 @@
 require 'yaml'
 require 'colorize'
 require 'io/console'
-require_relative 'functions'
+require './functions'
 
 
 $find_data_pattern = /@\w[\w\d]*/ # Matches an at symbol followed by a valid Ruby variable identifier
@@ -13,8 +13,8 @@ $find_function_call_pattern = /\{(\w[\w\d]*[\?\!]?)[^{}]*\}/ # Matches a Ruby fu
 $find_command_call_pattern = /\[\*[^\[\]]+\]/ # Matches a star followed by any non-square bracket characters, wrapped by square brackets
 $find_clear_pattern = /\s(\*-\*)\s/ # Matches a dash surrounded by two stars with whitespace on either side
 $rule_split_pattern = /(\s|\*|\!)/ # Used for splitting a rule by whitespace, stars and exclaimation marks
-$punctuation = /[^\w\s\xC0-\xFF]/ # Some punctuation excluding apostrophes and a few others
-$punc_no_apos = /[^\w\s\xC0-\xFF']/
+$punctuation = /[^\w\s]/ # Some punctuation excluding apostrophes and a few others
+$punc_no_apos = /[^\w\s']/
 
 class String
   def is_pos_i?
@@ -50,7 +50,7 @@ class AI
     @rules.each do |name, response|
       options = name.split("|").each {|val| val.strip!}
       options.each do |op|
-        if op != "__unknown"
+        if op != "__unknown" and op != "__exit" and op != "__load"
           matched, var = check(op, text)
           if matched
             execute_rule(name, ai_prefix, var)
@@ -122,25 +122,31 @@ class AI
     self.on_load(ai_prefix)
     while true
       print prompt
-      text = gets
-      if text != nil
-        text = text.downcase.strip
-        if ["quit", "exit"].include?(text)
-          self.on_exit(ai_prefix)
-          save = ''
-          while not ['y', 'n'].include? save do
-            # print "Do you want to save the data from this session? It will #{"overwrite".red} the data currently in '#{@path}'! [#{"y".green}/#{"n".light_red}] ".italic
-            # save = STDIN.getch # Uncomment to allow save choosing
-            save = 'n'
-            puts
+      begin
+        text = gets
+      rescue Interrupt => e
+        puts "REPL interrupted, closing.".light_red
+        break
+      else
+        if text != nil
+          text = text.downcase.strip
+          if ["quit", "exit"].include?(text)
+            self.on_exit(ai_prefix)
+            save = ''
+            while not ['y', 'n'].include? save do
+              print "Do you want to save the data from this session? It will #{"overwrite".red} the data currently in '#{@path}'! [#{"y".green}/#{"n".light_red}] ".italic
+              save = STDIN.getch # Uncomment to allow save choosing
+              save = 'n'
+              puts
+            end
+            if save == 'y' then
+              self.save_data
+              puts "\nDone!"
+            end
+            exit
           end
-          if save == 'y' then
-            self.save_data
-            puts "\nDone!"
-          end
-          exit
+          self.run(text, ai_prefix)
         end
-        self.run(text, ai_prefix)
       end
     end
   end

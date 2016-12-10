@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require_relative 'yamlai'
+require './yamlai'
 
 prefix = "AI> ".green.italic
 
