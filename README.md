@@ -31,7 +31,7 @@ I added the line numbers in myself.
 On line 1, when I say "Hi", it searches through the rules defined in the YAML. First, it checks the rule defined as
 `hello *|hi *|hey *|howdy *`. It splits the rule up into 4 other rules: `hello *`, `hi *`, `hey *` and `howdy *` and
 checks each of them against the input text, `Hello world`. It checks `hi *`, which obviously doesn't match; it then checks
-"hello *", which does match because `hello` matches `Hello` (case-insensitive) and the `&ast;` matches anything, so it
+"hello *", which does match because `hello` matches `Hello` (case-insensitive) and the asterisk matches anything, so it
 matches `world`. Because `Hello world` matches "hello *", it outputs the string to the right of the definition:
 "Hello, @person.". The @person evaluates to `"Human"`, because in the data section of the YAML, 'person' is initialized to
 `"Human"`.
