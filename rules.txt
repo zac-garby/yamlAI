@@ -13,5 +13,4 @@ In output strings:
   @x            -> Loads the data field called 'x'
   {func arg}    -> Runs the function 'func' defined in functions.rb and replaces the call with the result of it
                   - The function is passed the argument, the variables, and the AI's data
-  [*command]     -> Runs 'command' in the terminal
   !clr!          -> Clears the screen, by printing "\e[H\e[2J"

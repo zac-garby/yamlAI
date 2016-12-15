@@ -54,6 +54,7 @@ In outputs, this is the syntax:
  - `::x=hello::` - Sets data field 'x' to string 'hello'
  - `@x` - Loads the data field named 'x'
  - `{func arg}` - Calls the function 'func' defined in _functions.rb_ and passes it the argument, the rule variables, and the AI's data dictionary
+ - `!clr!` - Clears the terminal screen
 
 ## Getting Started
 If you want to just quickly run a chatbot, download the entire repo and run the following commands in Terminal (This is UNIX, however it's probably very similar on Windows):

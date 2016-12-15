@@ -122,6 +122,8 @@ class AI
       text[/!clr!/] = ""
     end
     text.strip!
+    puts "Clear screens executed" if verbose
+    
     return text
   end
   
