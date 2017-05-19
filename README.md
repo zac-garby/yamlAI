@@ -1,8 +1,6 @@
 # yamlAI
 This project is hosted on [GitHub](https://github.com/Zac-Garby/yamlAI).
 
-A tool for making chatbots using Ruby and YAML.
-
 ## Example
 ```yaml
 data:
