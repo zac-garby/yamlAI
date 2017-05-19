@@ -1,4 +1,6 @@
 # yamlAI
+This project is hosted on [GitHub](https://github.com/Zac-Garby/yamlAI).
+
 A tool for making chatbots using Ruby and YAML.
 
 ## Example
@@ -26,7 +28,7 @@ I'll explain the details later, but here's an example session with this AI:
 10. AI> Goodbye
   # The program exits.
 ```
-I added the line numbers in myself.
+(Line numbers not included)
 
 On line 1, when I say "Hi", it searches through the rules defined in the YAML. First, it checks the rule defined as
 `hello *|hi *|hey *|howdy *`. It splits the rule up into 4 other rules: `hello *`, `hi *`, `hey *` and `howdy *` and
@@ -72,8 +74,3 @@ cd yamlAI
 This should display open a prompt asking for your input.
 
 If you want to make your own chatbot, read the example and syntax sections of this page and try and figure it out from that, or wait for me to make a GitHub Wiki page.
- 
-## TODO
-In no order:
-
- - Allow calling functions in rule definitions
