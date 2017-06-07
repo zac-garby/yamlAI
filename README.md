@@ -1,5 +1,4 @@
 # yamlAI
-This project is hosted on [GitHub](https://github.com/Zac-Garby/yamlAI).
 
 ## Example
 ```yaml
